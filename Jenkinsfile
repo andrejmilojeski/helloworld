@@ -1,16 +1,12 @@
 #!/usr/bin/env groovy
-pipeline {
-    agent any
-    stages {
-        stage('Example') {
-            steps {
-                echo 'Hello World'
-            }
+node {
+    stage('Example') {
+        try {
+            sh 'exit 1'
         }
-    }
-    post { 
-        always { 
-            echo 'I will always say Hello again!'
+        catch (exc) {
+            echo 'Something failed, I should sound the klaxons!'
+            throw
         }
     }
 }
